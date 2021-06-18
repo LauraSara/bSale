@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <script src="/static/bootstrap.bundle.min.js"></script>  
+  
+  <title>Document</title>
+  <style>
+    .card-img-top {
+      height: 20rem;
+    }
+
+    .card h5 {
+      text-align: center;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <!--MENU PRINCIPAL-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Bsale Test</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Tienda</a>
+          </li>
+
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Buscador" aria-label="Search">
+          <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </form>
+        <button class="btn btn-outline-dark" type="submit"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row">
+    <% for (let producto of productos) { %>
+      <div class="card col-4 m-4" style="width: 18rem;">
+        <img src="<%= producto.url_image %>" class="card-img-top" alt="imagen referencial">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= producto.name %>
+          </h5>
+          <hr />
+          <h5>
+            <%= producto.price %><span><a href="#" class="btn"><i class="fa fa-cart-plus" aria-hidden="true"></i>
+                </a> </span>
+          </h5>
+        </div>
+      </div>
+      <% } %>
+
+
+  </div>
+
+
+
+  
+
+</body>
+
+</html>
