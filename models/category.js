@@ -5,6 +5,6 @@ module.exports = (sql, type) => {
       primaryKey: true,
       autoIncrement: true
     },
-    category: type.STRING
+    name: type.STRING
   });
 }

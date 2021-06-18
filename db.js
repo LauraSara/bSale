@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
 
-// acá creamos la conexión a la Base de Datos
+//  Conexión a la Base de Datos
 const sql = new Sequelize('bsale', 'root', 'laurasarabia', {
   host: 'localhost',
   dialect: 'mysql'
 });
 
-// acá creamos las tablas
+// creacion de las tablas
 const Product = sql.define('product', {
   id: {
     type: Sequelize.INTEGER,
@@ -29,7 +29,7 @@ const Product = sql.define('product', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  category: {
+  categoryId: {
     type: Sequelize.INTEGER,
     allowNull: false
   }
@@ -47,14 +47,17 @@ const Category = sql.define('category', {
   }
 });
 
-//  después sincronizamos nuestro código con la base de datos
+//  sincronizar el código con la base de datos
 sql.sync()
-.then(() => {
-  console.log('Base de datos y tablas creadas');
-});
+  .then(() => {
+    console.log('Base de datos y tablas creadas');
+  });
+
+Category.hasMany(Product);
+Product.belongsTo(Category, { foreignKey: 'categoryId'});
 
 
-// finalmente acá listamos todos los modelos que queremos exportar
+
 module.exports = {
   Product,
   Category
