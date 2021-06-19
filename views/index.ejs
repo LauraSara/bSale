@@ -14,51 +14,11 @@
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
   <script src="/static/jquery-3.6.0.min.js"></script>
   <title>Tienda Bsale</title>
-  <style>
-    body {
-      background: #0575E6;
-      /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #021B79, #0575E6);
-      /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #021B79, #0575E6);
-      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    }
 
-    nav {
-      background: #fe8c00;
-      /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #f83600, #fe8c00);
-      /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #f83600, #fe8c00);
-      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-    }
-
-    h1 {
-      font-family: 'Pacifico', cursive;
-      margin: 5px;
-    }
-
-    .card-img-top {
-      height: 20rem;
-    }
-
-    .card h5 {
-      text-align: center;
-      display: inline-block;
-    }
-
-    .buscador {
-      margin: 5px;
-    }
-
-    div#filtrar {
-      max-width: 500px;
-      margin: 15px;
-    }
-  </style>
 </head>
 
 <body>
@@ -92,9 +52,9 @@
 
   <div id="filtrar">
     <select id="categoria" name="categoria" class="form-select" aria-label="Default select example">
-      <option name="categoria" selected>Filtrar por categoria</option>
-      <option value="1" id="c1">Alcohol</option>
-      <option value="2" id="c2">Alimentos</option>
+      <option selected>Filtrar por categoria</option>
+      <option value="1" id="c1"><a href="/categoria1"></a> Alcohol</option>
+      <option value="2" id="c2"> <a href="/categoria2"></a> Alimentos</option>
     </select>
   </div>
 
@@ -103,12 +63,13 @@
       <div class="card col-4 m-4" style="width: 18rem;">
         <img src="<%= producto.url_image %>" class="card-img-top" alt="imagen referencial">
         <div class="card-body">
-          <h5 class="card-title nombres">
+          <h5 class="card-title products">
             <%= producto.name %>
           </h5>
           <hr />
           <h5>
-            $<%= producto.price %><span><a href="#" class="btn"><i class="fa fa-cart-plus" aria-hidden="true"></i>
+            $<%= producto.price %><span><a href="/agregarCarrito" class="btn agregarCarrito"><i class="fa fa-cart-plus"
+                    aria-hidden="true"></i>
                 </a> </span>
           </h5>
         </div>
@@ -120,26 +81,21 @@
 
   <script>
     $(document).ready(function () {
+
       $('#buscador').keyup(function () {
-        var nombres = $('.nombres');
+        var products = $('.products');
         var buscando = $(this).val();
         var card = '';
-        for (var i = 0; i < nombres.length; i++) {
-          card = $(nombres[i]).html().toLowerCase();
+        for (var i = 0; i < products.length; i++) {
+          card = $(products[i]).html().toLowerCase();
           for (var x = 0; x < card.length; x++) {
             if (buscando.length == 0 || card.indexOf(buscando) > -1) {
-              $(nombres[i]).parents('.card').show();
+              $(products[i]).parents('.card').show();
             } else {
-              $(nombres[i]).parents('.card').hide();
+              $(products[i]).parents('.card').hide();
             }
           }
         }
-      });
-
-
-      $('#c1').on('click', function () {
-        //esconder los de la categoria alimentos
-
       });
 
 
