@@ -1,9 +1,8 @@
 const { Router } = require('express');
 const router = Router();
-const { Product } = require('./db')
-const { Category } = require('./db')
-
-
+const { Product } = require('./db');
+const { Category } = require('./db');
+const { Op } = require("sequelize");
 
 
 const productos =
@@ -123,6 +122,40 @@ router.get("/agregarCarrito", async (req, res) => {
   res.render('index', { productos, Category });
 });
 
+router.get("/categoriaAlcohol", async (req, res) => {
+  let alcohol = req.query.alcohol
+
+  const { count, rows } = await Product.findAndCountAll({
+    where: {
+      categoryId: {
+        [Op.like]: `%${1}%`
+      }
+    }
+  });
+  console.log(count);
+  console.log(rows);
+//  res.status(200).json({ count: count, rows: rows })
+  res.render('index', { productos: rows});
+
+});
+
+router.get("/categoriaAlimentos", async (req, res) => {
+  let Alimentos = req.query.Alimentos
+
+  const { count, rows } = await Product.findAndCountAll({
+    where: {
+      categoryId: {
+        [Op.like]: `%${2}%`
+      }
+    }
+  });
+  console.log(count);
+  console.log(rows);
+//  res.status(200).json({ count: count, rows: rows })
+  res.render('index', { productos: rows});
+
+});
+
 /*
 router.post("/product",  async (req, res) => { 
   if(req.body.name=="" || req.body.price==""){
@@ -150,10 +183,25 @@ router.post("/category",  async (req, res) => {
   });		
   res.status(200).json(`Category ${category.name} created`);
 });
-
-
-
 */
+
+router.get("/filter-product", async (req, res) => {
+  let filter = req.query.filter
+
+  const { count, rows } = await Product.findAndCountAll({
+    where: {
+      name: {
+        [Op.like]: `%${filter}%`
+      }
+    }
+  });
+  console.log(count);
+  console.log(rows);
+//  res.status(200).json({ count: count, rows: rows })
+  res.render('index', { productos: rows});
+
+});
+
 
 
 module.exports = router;
