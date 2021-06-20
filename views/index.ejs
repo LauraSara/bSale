@@ -41,7 +41,7 @@
               Categorias
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/categoriaAlcohol#">Alcohol</a></li>
+              <li><a class="dropdown-item" href="/categoriaAlcohol">Alcohol</a></li>
               <li><a class="dropdown-item" href="/categoriaAlimentos">Alimentos</a></li>
               <li>
                 <hr class="dropdown-divider">
@@ -54,15 +54,23 @@
         <button class="btn btn-outline-dark" type="submit"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
         </button>
 
-        <p class="buscador">
-          <input id="buscador" type="input" placeholder="Search" value="">
-        </p>
+        <form action="/filter-product" method="POST">
+          <input id="buscador" name="filter" type="input" placeholder="Search" value="">
+          <button type="submit" class="btn btn-danger btn-sm">Search</button>
+        </form>
+        <!--
+  <p class="buscador">
+    <input id="buscador" type="input" placeholder="Search" value="">
+  </p>
+
+  <button onclick="buscar()">Buscar</button>
+-->
 
       </div>
     </div>
   </nav>
 
-  
+
 
   <div class="row">
     <% for (let producto of productos) { %>
@@ -88,25 +96,15 @@
   <script>
     $(document).ready(function () {
 
-      $('#buscador').keyup(function () {
-        var products = $('.products');
-        var buscando = $(this).val();
-        var card = '';
-        for (var i = 0; i < products.length; i++) {
-          card = $(products[i]).html().toLowerCase();
-          for (var x = 0; x < card.length; x++) {
-            if (buscando.length == 0 || card.indexOf(buscando) > -1) {
-              $(products[i]).parents('.card').show();
-            } else {
-              $(products[i]).parents('.card').hide();
-            }
-          }
-        }
-      });
-
-
-
     });
+
+    function buscar() {
+      $('#buscador').keyup(function () {
+        var buscando = $(this).val();
+
+        console.log(buscando)
+      });
+    }
   </script>
 </body>
 

@@ -101,16 +101,6 @@ router.get('/', async function (req, res) {
   });
 
 
-  /*
-    var categoriaAlcohol = productos.filter(function (producto) {
-      return producto.categoryId === 1
-    });
-    console.log(categoriaAlcohol + "categoria 1");
-  */
-
-  var catAlcohol = productosDb.filter(x => x.categoryId == 1);
-  var catAlimentos = productosDb.filter(x => x.categoryId == 2);
-  console.log(catAlimentos);
 
   res.render('index', { productos: productosDb, Category: categoryDb });
 });
@@ -132,8 +122,7 @@ router.get("/categoriaAlcohol", async (req, res) => {
       }
     }
   });
-  console.log(count);
-  console.log(rows);
+
 //  res.status(200).json({ count: count, rows: rows })
   res.render('index', { productos: rows});
 
@@ -185,8 +174,10 @@ router.post("/category",  async (req, res) => {
 });
 */
 
-router.get("/filter-product", async (req, res) => {
-  let filter = req.query.filter
+router.post("/filter-product", async (req, res) => {
+  console.log("dentro de filter")
+
+  let filter = req.body.filter
 
   const { count, rows } = await Product.findAndCountAll({
     where: {
